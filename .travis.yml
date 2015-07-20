@@ -1,0 +1,15 @@
+language: javascript
+
+before_install:
+  - chmod u+x build.sh
+  - pip isntall ablog
+  - npm install react-tools --save
+
+script:
+  - ./build.sh
+
+after_success:
+  - git config --global user.name "Andrew Schmitt"
+  - git config --global user.email "aschmitt@berkeley.edu"
+  - git config --global push.default simple
+  - ablog deploy --push-quietly --github-token=DEPLOY_KEY -m="`git log -1 --pretty=%B`"
