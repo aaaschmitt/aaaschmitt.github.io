@@ -2,7 +2,7 @@ language: javascript
 
 before_install:
   - chmod u+x build.sh
-  - pip install ablog
+  - sudo pip install ablog
   - npm install react-tools --save
 
 script:
