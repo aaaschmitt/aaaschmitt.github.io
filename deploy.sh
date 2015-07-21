@@ -2,10 +2,6 @@
 set -e # exit with nonzero exit code if anything fails
 
 # go to the out directory and create a *new* Git repo
-cd dist
-echo "begin"
-echo "https://${GH_TOKEN}@${GH_REF}"
-git init
 
 # inside this git repo we'll pretend to be a new user
 git config --global user.name "Andy Schmitt"
