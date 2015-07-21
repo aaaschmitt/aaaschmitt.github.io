@@ -1,0 +1,31 @@
+{
+  "name": "aaaschmitt.github.io",
+  "version": "1.0.0",
+  "description": "MY website",
+  "main": "main.js",
+  "scripts": {
+    "test": "blah"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaaschmitt/aaaschmitt.github.io.git"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "Andrew Schmitt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaaschmitt/aaaschmitt.github.io/issues"
+  },
+  "homepage": "https://github.com/aaaschmitt/aaaschmitt.github.io#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-html-replace": "^1.5.1",
+    "gulp-order": "^1.1.1",
+    "gulp-react": "^3.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.2.0"
+  }
+}
