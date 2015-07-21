@@ -1,11 +1,8 @@
 #!/bin/bash
 set -e # exit with nonzero exit code if anything fails
 
-# clear and re-create the out directory
-rm -rf dist || exit 0;
-
 # go to the out directory and create a *new* Git repo
-cd dist
+cd build
 git init
 
 # inside this git repo we'll pretend to be a new user
