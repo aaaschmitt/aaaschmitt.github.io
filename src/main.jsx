@@ -9,4 +9,5 @@ var TopNav = React.createClass({
     });
 
 var Another = 5
+var fuckingBuilds = 25
 React.render(<TopNav/>, $("#top-nav").get(0));

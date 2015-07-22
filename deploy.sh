@@ -25,4 +25,4 @@ git commit -m "Deploy to aaaschmitt.github.io via Travis CI"
 # will be lost, since we are overwriting it.) We redirect any output to
 # /dev/null to hide any sensitive credential data that might otherwise be exposed.
 echo  "https://${DEPLOY_TOKEN}@${GH_REF}"
-git push --force "https://${DEPLOY_TOKEN}@${GH_REF}" gh-pages > /dev/null 2>&1
+git push --force "https://${DEPLOY_TOKEN}@${GH_REF}" master:gh-pages > /dev/null 2>&1
