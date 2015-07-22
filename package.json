@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/aaaschmitt/aaaschmitt.github.io#readme",
   "devDependencies": {
+    "bower": "^1.4.1",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-html-replace": "^1.5.1",
