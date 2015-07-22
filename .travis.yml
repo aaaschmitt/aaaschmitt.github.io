@@ -3,6 +3,7 @@ language: javascript
 before_install:
   - chmod u+x build.sh
   - chmod u+x deploy.sh
+  - bower install
   - npm i
 
 script:
