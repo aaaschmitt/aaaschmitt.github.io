@@ -8,6 +8,7 @@ var order = require('gulp-order');
 
 var path = {
   HTML: 'index.html',
+  README: 'README.md',
   ALL: ['bower_components/jquery-2.1.4.min/index.js', 'bower_components/jquery-2.1.4.min/index.js', 'src/**.jsx', 'index.html'],
   BOWER: ['bower_components/jquery-2.1.4.min/jquery-2.1.4.min.js', 'bower_components/react/react.min.js'],
   JSX: ['src/**.jsx'],
@@ -56,12 +57,15 @@ gulp.task('build', function(){
     .pipe(gulp.dest(path.DEST_BUILD));
 });
 
-//replace dev scripts
+//replace dev scripts and copy index and README
 gulp.task('replaceHTML', function(){
   gulp.src(path.HTML)
     .pipe(htmlreplace({
       'js': 'build/' + path.MINIFIED_OUT
     }))
+    .pipe(gulp.dest(path.DEST));
+
+  gulp.src(path.README)
     .pipe(gulp.dest(path.DEST));
 });
 
