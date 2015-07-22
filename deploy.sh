@@ -17,7 +17,7 @@ git config --global user.email "aschmitt@berkeley.edu"
 
 # The first and only commit to this new Git repo contains all the
 # files present with the commit message "Deploy to GitHub Pages".
-time = $(date +"%r")
+time=$(date +"%r")
 git add .
 git commit -m "Deploy via Travis CI at: ${time}"
 
