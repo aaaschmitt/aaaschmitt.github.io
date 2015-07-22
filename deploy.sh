@@ -19,7 +19,7 @@ git config --global user.email "aschmitt@berkeley.edu"
 # files present with the commit message "Deploy to GitHub Pages".
 time=$(date +"%r")
 git add .
-git commit -m "Deploy via Travis CI at: ${time}"
+git commit -m "[ci skip] Deploy via Travis CI at: ${time}"
 
 # Force push from the current repo's master branch to the remote
 # repo's gh-pages branch. (All previous history on the gh-pages branch
