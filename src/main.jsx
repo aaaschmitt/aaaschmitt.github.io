@@ -8,4 +8,5 @@ var TopNav = React.createClass({
       }
     });
 
+var Another = 5
 React.render(<TopNav/>, $("#top-nav").get(0));
