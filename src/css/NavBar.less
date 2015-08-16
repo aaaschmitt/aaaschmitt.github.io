@@ -1,0 +1,92 @@
+/**
+ * Styling for nav-bar
+ */
+
+ /** Imports */
+ @import "Colors";
+ @import "Functions";
+ @import "Main";
+
+#top-nav {
+ padding-top: 1%;
+ padding-bottom: 1%;
+}
+
+.nav-element {
+	height: @nav-height;
+	width: 22%;
+	font-height: 3em;
+	line-height: @nav-height;
+	white-space: nowrap;
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	border-right: 1px solid @purple-dark;
+	border-left: 1px solid @purple-dark;
+	text-align: center;
+	box-shadow: 4px 5px 5px 0px @purple-dark;
+
+	.linear-grad(@purple-lightest, @purple-primary, @purple-secondary, @purple-dark, @purple-dark, @purple-secondary, @purple-primary);
+	/*.linear-grad(@purple-dark, @purple-secondary, @purple-primary, @purple-primary, @purple-secondary, @purple-dark);*/
+	.nav-elm-transition;
+	
+	&:focus {outline: none;};
+	&:hover {.buttonpop};
+}
+
+.nav-element-first {
+	.nav-element;
+	border-top-left-radius: @nav-radius;
+	border-bottom-left-radius: @nav-radius;
+	border-right: 1px solid @purple-dark;
+}
+
+.nav-element-last {
+	.nav-element;
+	border-top-right-radius: @nav-radius;
+	border-bottom-right-radius: @nav-radius;
+	border-left: 1px solid @purple-dark;
+}
+
+.buttonpop {
+	-webkit-animation-name: buttonpop;
+	-webkit-animation-duration: @buttonpop-dur;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-fill-mode: forwards;
+	animation-name: buttonpop;
+	animation-duration: @buttonpop-dur;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+}
+@keyframes buttonpop {
+	0%   {.buttonpop-step(0, 2, .5, 0)}
+    25%  {.buttonpop-step(5, 2, 1, 0)}
+    50%  {.buttonpop-step(10, 2, 1, 0)}
+    100% {.buttonpop-step(20, 2, 3, 0)}
+}
+@-webkit-keyframes buttonpop {
+	0%   {.buttonpop-step(0, 2, .5, 0)}
+    25%  {.buttonpop-step(5, 2, 1, 0)}
+    50%  {.buttonpop-step(10, 2, 1, 0)}
+    100% {.buttonpop-step(20, 2, 3, 0)}
+}
+.buttonpop-step(@grad-factor, @z-index, @trans-x, @trans-y) {
+	z-index: @z-index;
+	color: @white;
+	.linear-grad(@purple-lightest + @grad-factor, @purple-primary + @grad-factor, @purple-secondary + @grad-factor);
+}
+.nav-elm-transition {
+	-webkit-transition: .2s ease-in;
+    -moz-transition: .2s ease-in;
+    -o-transition: .2s ease-in;
+    transition: .2s ease-in;
+}
+.nav-elm-transform(@angle) {
+	-webkit-transform: rotateX(@angle deg);
+    -moz-transform: rotateX(@angle deg);
+    -o-transform: rotateX(@angle deg);
+    -ms-transform: rotateX(@angle deg);
+}
+
+
+

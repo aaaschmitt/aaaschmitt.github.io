@@ -4,34 +4,43 @@
 <title>Andrew Schmitt</title>
 
 <!-- build:css -->
+<link rel="stylesheet" type="text/css" href="./src/css/LeagueGothicFont.css">
 <link rel="stylesheet" type="text/css" href="./src/css/Main.css">
+<link rel="stylesheet" type="text/css" href="./src/css/NavBar.css">
+<link rel="stylesheet" type="text/css" href="./src/css/Colors.css">
 <!-- endbuild -->
 
 </head>
 <body>
-<div id="top-nav">
-</div>
+	<div id="loading">
+		<span id="load-percent">0</span>%
+	</div>
+	<!-- build:loading -->
+	<script src="./src/loading-js/index.js"></script>
+	<script src="./src/loading-js/animateNumber.min.js"></script>
+	<!-- endbuild -->
 
-<p>
-	<b>Welcome to Andrew Schmitt's up and coming webiste.  There isn't much here yet because I just made it. Check back later to see what project's I've worked and am currently a part of.</b>
-</p>
+	<div id="content">
+		<div id="top-nav"></div>
 
-<div id="test">
+		<div id="stars"></div>
 
-</div>
+		<div id="hello">Hello, Universe!</div>
+
+		<p>
+			<b>Welcome to Andrew Schmitt's up and coming webiste.  There isn't much here yet because I just made it. Check back later to see what project's I've worked on and am currently a part of.</b>
+		</p>
+	</div>
 
 </body>
-
-<!-- Dev scripts -->
-
 <!-- build:js -->
+<!-- Dev scripts -->
 <!-- BOWER -->
-<script src="./bower_components/jquery-2.1.4.min.js"></script>
-<script src="./bower_components/react.min.js"></script>
+<script src="./src/main-js/react.js"></script>
 
 <!-- SRC -->
-<script src="./src/main.js"></script>
-<script src="./src/test.js"></script>
+<script src="./src/main-js/main.js"></script>
+<script src="./src/main-js/stars.js"></script>
 <!--endbuild -->
 
 </html>

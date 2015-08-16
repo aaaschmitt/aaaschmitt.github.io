@@ -1,0 +1,44 @@
+/**
+ * Classes for handling cross browser compatibility of basic actions
+ * and other utilities.
+ */
+@randNum: `Math.random()`;
+
+/**
+ * A linear gradient that accepts any number of arguments
+ */
+.linear-grad(@value1,@value2:X,...) {
+
+	@value: ~`"@{arguments}".replace(/[\[\]]|\,\sX/g, '')`;
+
+	background: -webkit-linear-gradient(@value); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(@value); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(@value); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(@value); /* Standard syntax */
+}
+/**
+ * Animations
+ */
+.scaleY(@factor) {
+	-webkit-transform: scaleY(@factor); /* Safari */
+    transform: scaleY(@factor);
+}
+.translate(@x, @y) {
+	-ms-transform: translate(@x,@y); /* IE 9 */
+   	-webkit-transform: translate(@x,@y); /* Safari */
+    transform: translate(@x,@y);
+}
+.transition() {
+	-webkit-transform: rotate(360deg) scale(2);
+    -moz-transform: rotate(360deg) scale(2);
+    -o-transform: rotate(360deg) scale(2);
+    -ms-transform: rotate(360deg) scale(2);
+}
+/**
+ * A less loop that takes in a mixin and 
+ * a number of times to repeat that mixin
+ */
+.loop-mixin(@counter, @mixin) when (@counter > 0) {
+  .loop((@counter - 1));
+  @class();
+}

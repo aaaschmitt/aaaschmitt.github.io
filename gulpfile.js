@@ -8,18 +8,25 @@ var order = require('gulp-order');
 var less = require('gulp-less');
 var minifyCSS = require('gulp-minify-css');
 
+var loading_components = ['bower_components/jquery-2.1.4.min/index.js', 'src/loading-js/**.js'],
+    main_components = ['bower_components/react/react.js', 'src/main-jsx/**.jsx'],
+    html_files = ['index.html'],
+    css_files = ['src/css/**.less', 'src/css/**.css'];
+
 var path = {
-  HTML: 'index.html',
+  HOME: 'index.html',
   README: 'README.md',
-  ALL: ['bower_components/jquery-2.1.4.min/index.js', 'bower_components/react/react.min.js', 'src/**.jsx', 'index.html', 'src/css/**.less'],
-  BOWER: ['bower_components/jquery-2.1.4.min/index.js', 'bower_components/react/react.min.js'],
-  JSX: ['src/**.jsx'],
-  LESS: ['src/css/**.less'],
-  SCRIPT: ['bower_components/jquery-2.1.4.min/index.js', 'bower_components/react/react.min.js', 'src/**.jsx'],
-  JS_MINIFIED_OUT: 'build.min.js',
+  HTML: html_files,
+  MAIN: main_components,
+  LOADING: loading_components,
+  CSS: css_files,
+  ALL: main_components.concat(html_files.concat(loading_components.concat(css_files))),
+
+  JS_MAIN_MINIFIED_OUT: 'build.min.js',
+  JS_LOADING_OUT: 'loading.min.js',
   CSS_MINIFIED_OUT: 'build.min.css',
+
   DEST_SRC: 'dist/src',
-  DEST_BOWER: 'dist/bower_components',
   DEST_BUILD: 'dist/build',
   DEST: 'dist'
 };
@@ -27,14 +34,14 @@ var path = {
 //compile .jsx to .js
 //compile .less to .css
 gulp.task('compile', function(){
-  gulp.src(path.JSX)
+  gulp.src(path.MAIN)
     .pipe(react())
     .pipe(rename(function(path) {
     	path.extname = ".js"
     }))
-    .pipe(gulp.dest(path.DEST_SRC));
+    .pipe(gulp.dest(path.DEST_SRC + '/main-js'));
 
-  gulp.src(path.LESS)
+  gulp.src(path.CSS)
     .pipe(less())
     .pipe(rename(function(path) {
       path.extname = ".css"
@@ -42,12 +49,13 @@ gulp.task('compile', function(){
     .pipe(gulp.dest(path.DEST_SRC + '/css'));
 });
 
-//copy index.html over to dist
+//copy index.html over to dist 
+//copy bower over to dist
 gulp.task('copy', function(){
   gulp.src(path.HTML)
     .pipe(gulp.dest(path.DEST));
-  gulp.src(path.BOWER)
-    .pipe(gulp.dest(path.DEST_BOWER));
+  gulp.src(path.LOADING)
+    .pipe(gulp.dest(path.DEST_SRC + '/loading-js'));
 });
 
 //watch all my files for changes
@@ -58,17 +66,26 @@ gulp.task('default', ['watch', 'compile', 'copy']);
 
 //concat and minify
 gulp.task('build', function(){
-  gulp.src(path.SCRIPT)
+  gulp.src(path.MAIN)
     .pipe(react())
     .pipe(order([
       'bower_components/**/*.js',
-      'src/**.jsx'
+      'src/main-jsx/**.jsx'
     ], {base: '.'}))
-    .pipe(concat(path.JS_MINIFIED_OUT))
+    .pipe(concat(path.JS_MAIN_MINIFIED_OUT))
     .pipe(uglify())
     .pipe(gulp.dest(path.DEST_BUILD));
 
-  gulp.src(path.LESS)
+  gulp.src(path.LOADING)
+  .pipe(order([
+      'bower_components/**/*.js',
+      'src/loading-js/**.js'
+    ], {base: '.'}))
+  .pipe(concat(path.JS_LOADING_OUT))
+  .pipe(uglify())
+  .pipe(gulp.dest(path.DEST_BUILD));
+
+  gulp.src(path.CSS)
     .pipe(less())
     .pipe(concat(path.CSS_MINIFIED_OUT))
     .pipe(minifyCSS())
@@ -79,8 +96,9 @@ gulp.task('build', function(){
 gulp.task('replaceHTML', function(){
   gulp.src(path.HTML)
     .pipe(htmlreplace({
-      'js': 'build/' + path.JS_MINIFIED_OUT,
-      'css' : 'build/' + path.CSS_MINIFIED_OUT
+      'js': 'build/' + path.JS_MAIN_MINIFIED_OUT,
+      'css' : 'build/' + path.CSS_MINIFIED_OUT,
+      'loading' : 'build/' + path.JS_LOADING_OUT
     }))
     .pipe(gulp.dest(path.DEST));
 

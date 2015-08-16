@@ -2,10 +2,59 @@
  * Main CSS file
  */
 
-@black: #000000;
-@white: #FFFFFF;
+/** Imports */
+@import "Functions";
+@import "Colors";
+
+/** Vars */
+@nav-height: 4em;
+@jumbo-font: 8em;
 
 body {
 	background-color: @black;
 	color: @white;
+	margin: 0 0 0 0;
+	text-align: center;
+	font-family: 'League Gothic', Fallback, sans-serif;
+}
+#loading {
+	font-size: @jumbo-font;
+	top: 45%;
+	width: 100%;
+	text-align: center;
+	position: absolute;
+}
+#content {
+	display: none;
+}
+/**
+ * Styling for the star background
+ */
+.star-sm {
+	.star(1px);
+}
+.star-md {
+	.star(2px);
+}
+.star-lg {
+	.star(5px);
+}
+.star(@size) {
+	width: @size;
+	height: @size;
+	background: white;
+	border-radius: @size;
+	position: absolute;
+	z-index: 0;
+	box-shadow: 1px 1px white;
+}
+/**
+ * Hello Universe
+ */
+#hello {
+	font-size: @jumbo-font;
+	margin: 5%;
+}
+#hello:hover {
+	text-shadow: 4px 4px @purple-dark; /* only works in IE10+ */
 }
