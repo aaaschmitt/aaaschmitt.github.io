@@ -11,7 +11,8 @@ var minifyCSS = require('gulp-minify-css');
 var loading_components = ['bower_components/jquery-2.1.4.min/index.js', 'src/loading-js/**.js'],
     main_components = ['bower_components/react/react.js', 'src/main-jsx/**.jsx'],
     html_files = ['index.html'],
-    css_files = ['src/css/**.less', 'src/css/**.css'];
+    css_files = ['src/css/**.less', 'src/css/**.css'],
+    assets = ['assets/*'];
 
 var path = {
   HOME: 'index.html',
@@ -20,7 +21,8 @@ var path = {
   MAIN: main_components,
   LOADING: loading_components,
   CSS: css_files,
-  ALL: main_components.concat(html_files.concat(loading_components.concat(css_files))),
+  ASSETS: assets,
+  ALL: main_components.concat(html_files.concat(loading_components.concat(css_files.concat(assets)))),
 
   JS_MAIN_MINIFIED_OUT: 'build.min.js',
   JS_LOADING_OUT: 'loading.min.js',
@@ -54,6 +56,8 @@ gulp.task('compile', function(){
 gulp.task('copy', function(){
   gulp.src(path.HTML)
     .pipe(gulp.dest(path.DEST));
+  gulp.src(path.ASSETS)
+    .pipe(gulp.dest(path.DEST + '/assets'));
   gulp.src(path.LOADING)
     .pipe(gulp.dest(path.DEST_SRC + '/loading-js'));
 });
@@ -92,7 +96,7 @@ gulp.task('build', function(){
     .pipe(gulp.dest(path.DEST_BUILD));
 });
 
-//replace dev scripts and copy index and README
+//replace dev scripts and copy index, assets, and README
 gulp.task('replaceHTML', function(){
   gulp.src(path.HTML)
     .pipe(htmlreplace({
@@ -101,6 +105,9 @@ gulp.task('replaceHTML', function(){
       'loading' : 'build/' + path.JS_LOADING_OUT
     }))
     .pipe(gulp.dest(path.DEST));
+
+  gulp.src(path.ASSETS)
+    .pipe(gulp.dest(path.DEST + '/assets'))
 
   gulp.src(path.README)
     .pipe(gulp.dest(path.DEST));

@@ -1,0 +1,44 @@
+/**
+ * Animations and style for the spaceship
+ */
+@import 'Functions';
+@flying-saucer-dur: 5s;
+@flying-saucer-spin-dur: 400ms;
+
+#spaceship-img {
+	position: relative;
+	z-index: 1;
+	margin-left: auto;
+	margin-right: auto;
+	height: 15em;
+	-webkit-transition: @flying-saucer-spin-dur ease-in;
+    -moz-transition: @flying-saucer-spin-dur ease-in;
+    -o-transition: @flying-saucer-spin-dur ease-in;
+    -ms-transition:@flying-saucer-spin-dur ease-in;
+    transition: @flying-saucer-spin-dur ease-in;
+
+	.flying-saucer;
+}
+#spaceship-img:hover {
+	.rotate(360deg);
+}
+.flying-saucer {
+	-webkit-animation-name: flying-saucer;
+	-webkit-animation-duration: @flying-saucer-dur;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-fill-mode: forwards;
+	animation-name: flying-saucer;
+	animation-duration: @flying-saucer-dur;
+	animation-iteration-count: infinite;
+	animation-fill-mode: forwards;
+}
+.flying-saucer-step(@margLeft) {
+	margin-left: @margLeft;
+}
+@keyframes flying-saucer {
+	0% {.flying-saucer-step(0%);}
+	25% {.flying-saucer-step(50%);}
+	50% {.flying-saucer-step(0%);}
+	75% {.flying-saucer-step(-50%);}
+	100% {.flying-saucer-step(0%);}
+}

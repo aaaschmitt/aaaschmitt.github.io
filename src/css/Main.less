@@ -26,6 +26,9 @@ body {
 }
 #content {
 	display: none;
+	text-align: center;
+	width: 100%;
+	height: 100%;
 }
 /**
  * Styling for the star background
@@ -46,14 +49,18 @@ body {
 	border-radius: @size;
 	position: absolute;
 	z-index: 0;
-	box-shadow: 1px 1px white;
+	box-shadow: 1px 1px 1px white;
 }
 /**
  * Hello Universe
  */
 #hello {
 	font-size: @jumbo-font;
-	margin: 5%;
+	position: relative;
+	margin-left: 10%;
+	margin-right: 10%;
+    max-width: 80%;
+    text-align: center;
 }
 #hello:hover {
 	text-shadow: 4px 4px @purple-dark; /* only works in IE10+ */
