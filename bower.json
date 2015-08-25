@@ -18,5 +18,8 @@
     "jquery-2.1.4.min": "http://code.jquery.com/jquery-2.1.4.min.js",
     "less": "~2.5.1",
     "react": "~0.13.3"
+  },
+  "devDependencies": {
+    "jquery": "~2.1.4"
   }
 }
