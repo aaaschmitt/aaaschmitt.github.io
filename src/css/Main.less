@@ -15,6 +15,7 @@ html {
 	background: -webkit-radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
 	background: -moz-radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
 	background: -ms-radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+	background-attachment: fixed;
 	height: 100%;
 	width: 100%;
 }
@@ -72,6 +73,7 @@ body {
 	height: 100vh;
 	z-index: 1;
 	min-heigh: 500px;
+	min-width: 500px;
     display: table-cell;   
     vertical-align: middle;
     .star-background();
@@ -95,27 +97,17 @@ body {
  * About Me
  */
 #about {
-	width: 100%;
-	height: 100%;
-	display: block;
-	overflow: auto;
+	padding: 20px;
+	min-heigh: 400px;
+	min-width: 400px;
+	z-index: 1;
+	display: inline-block;
 }
 #about-headshot {
 	float: left;
-	padding: 10%;
 	padding-right: 5%;
 	padding-left: 5%;
 	width: 40%;
 	max-height: 100vh;
 	border-radius: 20px;
-}
-#about-text {
-	float: left;
-	padding-top: 10%;
-	padding-right: 5%;
-	width: 45%;
-	max-height: 100vh;
-}
-.content {
-	display: none;
 }
