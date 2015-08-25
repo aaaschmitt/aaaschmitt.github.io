@@ -17,7 +17,9 @@ var TopNav = React.createClass({
             navContent.push(<div className='nav-element-last' key={i}>{navItems[i]}</div>);
 
             return (
-                <div>{navContent}</div>
+                <div id="top-nav">
+                    {navContent}
+                </div>
             );
         }
     });

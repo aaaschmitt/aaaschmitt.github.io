@@ -10,12 +10,13 @@
 @nav-height: 4em;
 @jumbo-font: 8em;
 
-body {
-	background-color: @black;
-	color: @white;
-	margin: 0 0 0 0;
-	text-align: center;
-	font-family: 'League Gothic', Fallback, sans-serif;
+html {
+	background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+	background: -webkit-radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+	background: -moz-radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+	background: -ms-radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+	height: 100%;
+	width: 100%;
 }
 #loading {
 	font-size: @jumbo-font;
@@ -24,23 +25,21 @@ body {
 	text-align: center;
 	position: absolute;
 }
-#content {
-	display: none;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-}
 /**
  * Styling for the star background
+ * This is some straight up LESS wizardry
  */
-.star-sm {
-	.star(1px);
-}
-.star-md {
-	.star(2px);
-}
-.star-lg {
-	.star(5px);
+.make-stars-default(@n, @output) when (@n > 0) {
+	@randX: `Math.random() * 100 + 1`;
+	@randY: `Math.random() * 100 + 1`;
+	@opacity: `Math.random()`;
+	@size: 2;
+	@return: "@{output}, radial-gradient(@{size}px @{size}px at @{randX}% @{randY}%, rgba(255,255,255, @{opacity}), rgba(0,0,0,0))";
+	& when (@n < 2) {
+		background: ~"@{return}";
+		background-attachment: fixed;
+	}
+	.make-stars-default(@n - 1, @return);
 }
 .star(@size) {
 	width: @size;
@@ -51,10 +50,37 @@ body {
 	z-index: 0;
 	box-shadow: 1px 1px 1px white;
 }
+.star-background {
+	@randX: `Math.random() * 100 + 1`;
+	@randY: `Math.random() * 100 + 1`;
+	@start: "radial-gradient(2px 2px at @{randX}% @{randY}%, #FFF, rgba(0,0,0,0))";
+	.make-stars-default(1000, @start);
+}
+body {
+	color: @white;
+	height: 100%;
+	width: 100%;
+	margin: 0 0 0 0;
+	text-align: center;
+	font-family: 'League Gothic', Fallback, sans-serif;
+}
 /**
  * Hello Universe
  */
-#hello {
+#greeting {
+	width: 100vw;
+	height: 100vh;
+	z-index: 1;
+	min-heigh: 500px;
+    display: table-cell;   
+    vertical-align: middle;
+    .star-background();
+}
+#greeting-text h2 {
+	color: @purple-primary;
+	z-index: 1;
+}
+#name {
 	font-size: @jumbo-font;
 	position: relative;
 	margin-left: 10%;
@@ -63,5 +89,33 @@ body {
     text-align: center;
 }
 #hello:hover {
-	text-shadow: 4px 4px @purple-dark; /* only works in IE10+ */
+	/*text-shadow: 4px 4px @purple-dark; /* only works in IE10+ */
+}
+/**
+ * About Me
+ */
+#about {
+	width: 100%;
+	height: 100%;
+	display: block;
+	overflow: auto;
+}
+#about-headshot {
+	float: left;
+	padding: 10%;
+	padding-right: 5%;
+	padding-left: 5%;
+	width: 40%;
+	max-height: 100vh;
+	border-radius: 20px;
+}
+#about-text {
+	float: left;
+	padding-top: 10%;
+	padding-right: 5%;
+	width: 45%;
+	max-height: 100vh;
+}
+.content {
+	display: none;
 }

@@ -10,26 +10,27 @@ var gulp = require('gulp'),
     del = require('del'),
     runseq = require('run-sequence');
 
-var main_components = ['bower_components/react/react.js', 'bower_components/jquery/dist/jquery.min.js', 'src/main-jsx/**.jsx'],
+var main_components = ['bower_components/react/react.js', 'src/main-jsx/**.jsx'],
+    loading_components = ['bower_components/jquery-2.1.4.min/index.js', 'src/loading-js/**.js'],
     html_files = ['index.html'],
     css_files = ['src/css/**.less', 'src/css/**.css'],
     assets = ['assets/*'],
-    jekyll_config = ['jekyll/Gemfile', 'jekyll/Gemfile.lock', 'jekyll/config.yml'],
-    jekyll_folders = ['jekyll/_includes/*', 'jekyll/_posts/*', 'jekyll/_layouts/*'];
+    jekyll_assets = ['jekyll/**/*'];
 
 var path = {
   HOME: 'index.html',
   README: 'README.md',
   HTML: html_files,
   MAIN: main_components,
+  LOADING: loading_components,
   CSS: css_files,
   ASSETS: assets,
-  JEKYLL_C: jekyll_config,
-  JEKYLL_F: jekyll_folders,
+  JEKYLL: jekyll_assets,
 
-  ALL: main_components.concat(html_files, css_files, assets, jekyll_config, jekyll_folders),
+  ALL: main_components.concat(html_files, loading_components, css_files, assets, jekyll_assets),
 
   JS_MAIN_MINIFIED_OUT: 'build.min.js',
+  JS_LOADING_OUT: 'loading.min.js',
   CSS_MINIFIED_OUT: 'build.min.css',
 
   DEST_SRC: 'dist/src',
@@ -70,12 +71,12 @@ gulp.task('compile', function(){
 gulp.task('copy', function(){
   gulp.src(path.HTML)
     .pipe(gulp.dest(path.DEST));
-  gulp.src(path.JEKYLL_C)
+  gulp.src(path.JEKYLL)
     .pipe(gulp.dest(path.DEST));
-  gulp.src(path.JEKYLL_F, {base: 'jekyll'})
-    .pipe(gulp.dest(path.DEST))
   gulp.src(path.ASSETS)
     .pipe(gulp.dest(path.DEST + '/assets'));
+  gulp.src(path.LOADING)
+    .pipe(gulp.dest(path.DEST_SRC + '/loading-js'));
 });
 
 //watch all my files for changes for dev build

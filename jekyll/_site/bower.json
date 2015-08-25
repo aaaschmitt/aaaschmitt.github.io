@@ -1,0 +1,22 @@
+{
+  "name": "aaaschmitt.github.io",
+  "version": "0.0.0",
+  "homepage": "https://github.com/aaaschmitt/aaaschmitt.github.io",
+  "authors": [
+    "Andrew Schmitt"
+  ],
+  "description": "MY Website",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery-2.1.4.min": "http://code.jquery.com/jquery-2.1.4.min.js",
+    "less": "~2.5.1",
+    "react": "~0.13.3"
+  }
+}
