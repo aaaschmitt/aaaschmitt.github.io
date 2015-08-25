@@ -101,15 +101,6 @@ gulp.task('build', function(){
     .pipe(uglify())
     .pipe(gulp.dest(path.DEST_BUILD));
 
-  gulp.src(path.LOADING)
-  .pipe(order([
-      'bower_components/**/*.js',
-      'src/loading-js/**.js'
-    ], {base: '.'}))
-  .pipe(concat(path.JS_LOADING_OUT))
-  .pipe(uglify())
-  .pipe(gulp.dest(path.DEST_BUILD));
-
   gulp.src(path.CSS)
     .pipe(less())
     .pipe(concat(path.CSS_MINIFIED_OUT))
@@ -117,15 +108,22 @@ gulp.task('build', function(){
     .pipe(gulp.dest(path.DEST_BUILD));
 });
 
-//replace dev scripts and copy index, assets, and README
+//replace dev scripts and copy index, assets, jekyll files/folders, and README
 gulp.task('replaceHTML', function(){
-  gulp.src(path.HTML)
+
+  gulp.src(path.JEKYLL_F,  {base: 'jekyll'})
     .pipe(htmlreplace({
       'js': 'build/' + path.JS_MAIN_MINIFIED_OUT,
       'css' : 'build/' + path.CSS_MINIFIED_OUT,
-      'loading' : 'build/' + path.JS_LOADING_OUT
     }))
     .pipe(gulp.dest(path.DEST));
+
+  gulp.src(path.HTML)
+    .pipe(gulp.dest(path.DEST));
+
+  gulp.src(path.JEKYLL_C)
+    .pipe(gulp.dest(path.DEST));
+
 
   gulp.src(path.ASSETS)
     .pipe(gulp.dest(path.DEST + '/assets'))
