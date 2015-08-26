@@ -58,3 +58,10 @@
   .loop((@counter - 1));
   @class();
 }
+/**
+ * Generate a random number and return it as @randomNum
+ * Useful if you want to use a single random num in multiple places
+ */
+.constRandom() {
+    @randomNum: `Math.floor(Math.random() * (5 - 1)) + 1`;
+}

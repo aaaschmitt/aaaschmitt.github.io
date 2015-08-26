@@ -11,11 +11,6 @@
 @jumbo-font: 8em;
 
 html {
-	background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-	background: -webkit-radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-	background: -moz-radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-	background: -ms-radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-	background-attachment: fixed;
 	height: 100%;
 	width: 100%;
 }
@@ -31,13 +26,16 @@ html {
  * This is some straight up LESS wizardry
  */
 .make-stars-default(@n, @output) when (@n > 0) {
-	@randX: `Math.random() * 100 + 1`;
-	@randY: `Math.random() * 100 + 1`;
+	@randX: `Math.random() * 250`;
+	@randY: `Math.random() * 250`;
 	@opacity: `Math.random()`;
-	@size: 2;
-	@return: "@{output}, radial-gradient(@{size}px @{size}px at @{randX}% @{randY}%, rgba(255,255,255, @{opacity}), rgba(0,0,0,0))";
+	.constRandom();
+	@size: @randomNum;
+	@return: "@{output}, radial-gradient(@{size}px @{size}px at @{randX}px @{randY}px, rgba(255,255,255, @{opacity}), rgba(0,0,0,0))";
 	& when (@n < 2) {
 		background: ~"@{return}";
+		background-repeat: repeat;
+		background-size: 250px 250px;
 		background-attachment: fixed;
 	}
 	.make-stars-default(@n - 1, @return);
@@ -51,11 +49,11 @@ html {
 	z-index: 0;
 	box-shadow: 1px 1px 1px white;
 }
-.star-background {
+.star-background(@num-stars) {
 	@randX: `Math.random() * 100 + 1`;
 	@randY: `Math.random() * 100 + 1`;
 	@start: "radial-gradient(2px 2px at @{randX}% @{randY}%, #FFF, rgba(0,0,0,0))";
-	.make-stars-default(1000, @start);
+	.make-stars-default(@num-stars, @start);
 }
 body {
 	color: @white;
@@ -64,6 +62,11 @@ body {
 	margin: 0 0 0 0;
 	text-align: center;
 	font-family: 'League Gothic', Fallback, sans-serif;
+	background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+	background: -webkit-radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+	background: -moz-radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+	background: -ms-radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+	background-attachment: fixed;
 }
 /**
  * Hello Universe
@@ -76,7 +79,7 @@ body {
 	min-width: 500px;
     display: table-cell;   
     vertical-align: middle;
-    .star-background();
+    .star-background(70);
 }
 #greeting-text h2 {
 	color: @purple-primary;
