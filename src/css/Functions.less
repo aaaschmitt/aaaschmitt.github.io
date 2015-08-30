@@ -50,6 +50,17 @@
     -ms-transform: rotate(@deg);
     transfrom: rotate(@deg);
 }
+.rotateY(@deg) {
+	-webkit-transform: rotateY(@deg);
+    -moz-transform: rotateY(@deg);
+    -o-transform: rotateY(@deg);
+    -ms-transform: rotateY(@deg);
+    transfrom: rotateY(@deg);
+}
+.column-span(@val) {
+	-webkit-column-span: @val;
+	column-span: @val;
+}
 /**
  * A less loop that takes in a mixin and 
  * a number of times to repeat that mixin

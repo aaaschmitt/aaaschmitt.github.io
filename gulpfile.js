@@ -10,24 +10,22 @@ var gulp = require('gulp'),
     del = require('del'),
     runseq = require('run-sequence');
 
-var main_components = ['bower_components/react/react.js', 'bower_components/jquery/dist/jquery.min.js', 'src/main-jsx/**.jsx'],
-    html_files = ['index.html'],
+var main_components = ['bower_components/react/react.js', 'bower_components/jquery/dist/jquery.min.js', 'bower_components/three.js/build/three.min.js', 'src/main-jsx/**.jsx'],
     css_files = ['src/css/**.less', 'src/css/**.css'],
     assets = ['assets/*'],
     jekyll_config = ['jekyll/Gemfile', 'jekyll/Gemfile.lock', 'jekyll/config.yml'],
-    jekyll_folders = ['jekyll/_includes/*', 'jekyll/_posts/*', 'jekyll/_layouts/*'];
+    jekyll_folders = ['jekyll/_includes/*', 'jekyll/_posts/*', 'jekyll/_layouts/*', 'jekyll/Resume/*', 'jekyll/DataViz/*', 'jekyll/Guides/*'];
 
 var path = {
   HOME: 'index.html',
   README: 'README.md',
-  HTML: html_files,
   MAIN: main_components,
   CSS: css_files,
   ASSETS: assets,
   JEKYLL_C: jekyll_config,
   JEKYLL_F: jekyll_folders,
 
-  ALL: main_components.concat(html_files, css_files, assets, jekyll_config, jekyll_folders),
+  ALL: ['index.html'].concat(main_components, css_files, assets, jekyll_config, jekyll_folders),
 
   JS_MAIN_MINIFIED_OUT: 'build.min.js',
   CSS_MINIFIED_OUT: 'build.min.css',
@@ -68,7 +66,7 @@ gulp.task('compile', function(){
 
 //copy html, jekyll, pure js, and assets to dist
 gulp.task('copy', function(){
-  gulp.src(path.HTML)
+  gulp.src(path.HOME)
     .pipe(gulp.dest(path.DEST));
   gulp.src(path.JEKYLL_C)
     .pipe(gulp.dest(path.DEST));
@@ -118,7 +116,7 @@ gulp.task('replaceHTML', function(){
     }))
     .pipe(gulp.dest(path.DEST));
 
-  gulp.src(path.HTML)
+  gulp.src(path.HOME)
     .pipe(gulp.dest(path.DEST));
 
   gulp.src(path.JEKYLL_C)
