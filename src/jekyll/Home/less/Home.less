@@ -1,18 +1,11 @@
 /**
- * Main CSS file
+ * Home page specific less
  */
 
-/** Imports */
-@import "Functions";
-@import "Colors";
+/** Wow these file paths are dumb */
+@import '../../../main-less/Functions';
+@import '../../../main-less/Colors';
 
-/** Vars */
-@nav-height: 4em;
-
-html {
-	height: 100%;
-	width: 100%;
-}
 /**
  * Styling for the star background
  * This is some straight up LESS wizardry
@@ -46,20 +39,6 @@ html {
 	@randY: `Math.random() * 100 + 1`;
 	@start: "radial-gradient(2px 2px at @{randX}% @{randY}%, #FFF, rgba(0,0,0,0))";
 	.make-stars-default(@num-stars, @start);
-}
-body {
-	color: @white;
-	height: 100%;
-	width: 100%;
-	margin: 0 0 0 0;
-	padding: 0;
-	text-align: center;
-	font-family: 'League Gothic', Fallback, sans-serif;
-	background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-	background: -webkit-radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-	background: -moz-radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-	background: -ms-radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-	background-attachment: fixed;
 }
 /**
  * Hello Universe
@@ -96,10 +75,6 @@ body {
 		font-size: 3em;
 	}
 }
-
-#hello:hover {
-	/*text-shadow: 4px 4px @purple-dark; /* only works in IE10+ */
-}
 /**
  * About Me
  */
@@ -119,14 +94,19 @@ body {
 	max-height: 100vh;
 	border-radius: 20px;
 }
+#about h1 {
+	color: @purple-primary;
+	border-bottom: 2px solid @purple-primary;
+	padding-bottom: 20px;
+}
 /**
  * Spaceship
  */
-@flying-saucer-dur: 5s;
 @flying-saucer-spin-dur: 400ms;
 
 #spaceship-img {
 	position: relative;
+	left: 0%;
 	z-index: 1;
 	top: 2em;
 	margin-left: auto;
@@ -137,45 +117,7 @@ body {
     -o-transition: @flying-saucer-spin-dur ease-in;
     -ms-transition:@flying-saucer-spin-dur ease-in;
     transition: @flying-saucer-spin-dur ease-in;
-	/*.flying-saucer;*/
 }
 #spaceship-img:hover {
 	.rotateY(180deg);
-}
-/**********
- * RESUME *
- **********/
-#Resume {
-	z-index: 1;
-	min-height: 500px;
-	min-width: 500px;
-    display: table-cell;   
-    vertical-align: middle;
-}
-#Resume-Data {
-	padding-left: 6%;
-	padding-right: 6%;
-}
-.section-header {
-	text-align: center;
-	font-size: 2em;
-	color: @purple-primary;
-	width: 100%;
-}
-.section-header th {
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-.subsection-header td {
-	border-bottom: 2px solid @purple-primary;
-}
-#Resume-Data td {
-	text-align: left;
-}
-.span-3 {
-	width: 33%;
-	text-align: center;
-}
-.span-1 {
-	width: 100%;
 }

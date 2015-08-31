@@ -7,6 +7,11 @@
  @import "Functions";
  @import "Main";
 
+@nav-height: 4em;
+@nav-radius: 10px;
+@buttonpop-dur: 200ms;
+
+
 #top-nav {
  margin-top: 1%;
  margin-bottom: 1%;
@@ -18,7 +23,6 @@
 .nav-element {
 	height: @nav-height;
 	width: 24%;
-	font-height: 3em;
 	line-height: @nav-height;
 	white-space: nowrap;
 	position: relative;
@@ -33,8 +37,10 @@
 	/*.linear-grad(@purple-dark, @purple-secondary, @purple-primary, @purple-primary, @purple-secondary, @purple-dark);*/
 	.nav-elm-transition;
 	
-	&:focus {outline: none;};
 	&:hover {.buttonpop};
+	&:active { 
+		box-shadow: none;
+	 };
 }
 
 .nav-element-first {
@@ -75,7 +81,6 @@
 }
 .buttonpop-step(@grad-factor, @z-index, @trans-x, @trans-y) {
 	z-index: @z-index;
-	color: @white;
 	.linear-grad(@purple-lightest + @grad-factor, @purple-primary + @grad-factor, @purple-secondary + @grad-factor);
 }
 .nav-elm-transition {
@@ -90,6 +95,5 @@
     -o-transform: rotateX(@angle deg);
     -ms-transform: rotateX(@angle deg);
 }
-
 
 
