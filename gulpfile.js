@@ -13,7 +13,7 @@ var gulp = require('gulp'),
     //these go into every page, need a dev version and a production build version
 var main_js_dev = ['bower_components/react/react.js', 'bower_components/jquery/dist/jquery.js', 
                   'src/main-jsx/**.jsx'],
-    main_files_build = ['bower_components/react/react.min.js', 'bower_components/jquery/dist/jquery.min.js', 
+    main_js_build = ['bower_components/react/react.min.js', 'bower_components/jquery/dist/jquery.min.js', 
                   'src/main-jsx/**.jsx', 'src/main-css/**.css'],
     main_less = [ 'src/main-less/**.css', 'src/main-less/**.less'],
 
@@ -82,8 +82,6 @@ function getAllOtherFiles(pageFileMap) {
 //Figure out all of the files to watch
 path.ALL = ['index.html'].concat(main_js_dev, main_less, jekyll_config, jekyll_html, assets, getAllOtherFiles(pageFileMap));
 
-console.log(path.ALL);
-
 /*************
  * DEV BUILD *
  *************/
@@ -145,48 +143,35 @@ gulp.task('default', function(cb) { runseq('clean', [ 'copy', 'compile-dev', 'wa
  * PRODUCTION BUILD *
  ********************/
 
-//concat and minify
-gulp.task('build', function(){
-  gulp.src(path.MAIN)
-    .pipe(react())
-    .pipe(order([
-      'bower_components/**/*.js',
-      'src/main-jsx/**.jsx'
-    ], {base: '.'}))
-    .pipe(concat(path.JS_MAIN_MINIFIED_OUT))
-    .pipe(uglify())
-    .pipe(gulp.dest(path.DEST_BUILD));
+//compile .jsx to .js
+//compile .less to .css
+//do it for each file
+//but using production versions
+gulp.task('compile-build', function() {
+    for (var pageName in pageFileMap) {
+        if (pageFileMap.hasOwnProperty(pageName)) {
+            var pageProps = pageFileMap[pageName];
 
-  gulp.src(path.CSS)
-    .pipe(less())
-    .pipe(concat(path.CSS_MINIFIED_OUT))
-    .pipe(minifyCSS())
-    .pipe(gulp.dest(path.DEST_BUILD));
-});
+            gulp.src(main_js_build.concat(pageProps.js))
+                .pipe(react())
+                .on('error', console.log.bind(console))
+                .pipe(order([
+                  'bower_components/**/*.js',
+                  '**/**.jsx'
+                ], {base: '.'}))
+                .pipe(concat(path.JS_OUT))
+                .pipe(uglify())
+                .pipe(gulp.dest(pageProps.PAGE_OUT));
 
-//replace dev scripts and copy index, assets, jekyll files/folders, and README
-gulp.task('replaceHTML', function(){
-
-  gulp.src(path.JEKYLL_F,  {base: 'jekyll'})
-    .pipe(htmlreplace({
-      'js': 'build/' + path.JS_MAIN_MINIFIED_OUT,
-      'css' : 'build/' + path.CSS_MINIFIED_OUT,
-    }))
-    .pipe(gulp.dest(path.DEST));
-
-  gulp.src(path.HOME)
-    .pipe(gulp.dest(path.DEST));
-
-  gulp.src(path.JEKYLL_C)
-    .pipe(gulp.dest(path.DEST));
-
-
-  gulp.src(path.ASSETS)
-    .pipe(gulp.dest(path.DEST + '/assets'))
-
-  gulp.src(path.README)
-    .pipe(gulp.dest(path.DEST));
+            gulp.src(pageProps.less.concat(main_less))
+                .pipe(less())
+                .on('error', console.log.bind(console))
+                .pipe(concat(path.CSS_OUT))
+                .pipe(minifyCSS())
+                .pipe(gulp.dest(pageProps.PAGE_OUT));
+        }
+    }
 });
 
 //production build
-gulp.task('production', ['replaceHTML', 'build']);
+gulp.task('build', ['clean', 'copy', 'compile-build']);

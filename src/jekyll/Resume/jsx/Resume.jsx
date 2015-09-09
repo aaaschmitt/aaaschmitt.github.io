@@ -447,7 +447,7 @@ function rotateCube(x, y, z) {
 			camera.position.z = this.z;
 			camera.lookAt(scene.position);
 		})
-		.easing( TWEEN.Easing.Elastic.InOut)
+		.easing( TWEEN.Easing.Quadratic.InOut )
 		.start();
 }
 var ResumeNav = React.createClass({
