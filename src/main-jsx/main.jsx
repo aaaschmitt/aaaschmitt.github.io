@@ -18,9 +18,9 @@ function getCenterXCoordOfElement(element) {
 var navItems = 
             [
                 {name: 'About', path: '/'},
-                {name: 'Resume', path: '/Resume'},
-                {name: 'Data-Viz', path: '/DataViz'},
-                {name: 'Guides', path: '/Guides'}
+                {name: 'Interactive Resume', path: '/Resume'},
+                // {name: 'Data-Viz', path: '/DataViz'},
+                // {name: 'Guides', path: '/Guides'}
             ];
 
 function goToPath(path) {
@@ -59,10 +59,10 @@ var TopNav = React.createClass({
 
                 $("*[class^='nav-element']").on('mouseenter', function() {
                     var centerX = getCenterXCoordOfElement($(this));
-                    spaceship.animate({'left': (centerX - ($(window).width() / 2)) + "px"}, 1000/60);
+                    spaceship.animate({'left': (centerX - ($(window).width() / 2)) + "px"}, 1000/30, 'swing');
                 });
                 $("*[class^='nav-element']").on('mouseleave', function() {
-                    spaceship.animate({'left': 0 + "px"}, 1000/60);
+                    spaceship.animate({'left': 0 + "px"}, 1000/30, 'swing');
                 });
             }
         }

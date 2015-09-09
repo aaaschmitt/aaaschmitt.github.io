@@ -9,6 +9,8 @@
 
 @nav-height: 4em;
 @nav-radius: 10px;
+@num-nav-elms: 2;
+@nav-elm-width: 24%;
 @buttonpop-dur: 200ms;
 
 
@@ -22,20 +24,20 @@
 
 .nav-element {
 	height: @nav-height;
-	width: 24%;
+	width: @nav-elm-width;
+	min-width: 175px;
 	line-height: @nav-height;
 	white-space: nowrap;
 	position: relative;
 	z-index: 1;
 	display: inline-block;
-	border-right: 1px solid @purple-dark;
-	border-left: 1px solid @purple-dark;
+	/*border-right: 1px solid @purple-dark;
+	border-left: 1px solid @purple-dark;*/
 	text-align: center;
-	box-shadow: 4px 5px 5px 0px @purple-dark;
-
-	.linear-grad(@purple-lightest, @purple-primary, @purple-secondary, @purple-dark, @purple-dark, @purple-secondary, @purple-primary);
-	/*.linear-grad(@purple-dark, @purple-secondary, @purple-primary, @purple-primary, @purple-secondary, @purple-dark);*/
+	/*box-shadow: 4px 5px 5px 0px @purple-dark;*/
+	/*.linear-grad(@purple-lightest, @purple-primary, @purple-secondary, @purple-dark, @purple-dark, @purple-secondary, @purple-primary);*/
 	.nav-elm-transition;
+	border: 1px solid @purple-dark;
 	
 	&:hover {.buttonpop};
 	&:active { 
@@ -45,17 +47,17 @@
 
 .nav-element-first {
 	.nav-element;
-	border-top-left-radius: @nav-radius;
+	/*border-top-left-radius: @nav-radius;
 	border-bottom-left-radius: @nav-radius;
-	border-right: 1px solid @purple-dark;
+	border-right: 1px solid @purple-dark;*/
 }
 
 .nav-element-last {
 	.nav-element;
-	border-top-right-radius: @nav-radius;
+	/*border-top-right-radius: @nav-radius;
 	border-bottom-right-radius: @nav-radius;
 	border-left: 1px solid @purple-dark;
-}
+*/}
 
 .buttonpop {
 	-webkit-animation-name: buttonpop;
@@ -81,7 +83,8 @@
 }
 .buttonpop-step(@grad-factor, @z-index, @trans-x, @trans-y) {
 	z-index: @z-index;
-	.linear-grad(@purple-lightest + @grad-factor, @purple-primary + @grad-factor, @purple-secondary + @grad-factor);
+	background-color: @purple-secondary - @grad-factor;
+	/*.linear-grad(@purple-lightest + @grad-factor, @purple-primary + @grad-factor, @purple-secondary + @grad-factor);*/
 }
 .nav-elm-transition {
 	-webkit-transition: .2s ease-in;

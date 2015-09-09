@@ -2,13 +2,21 @@
  * Resume less
  */
 @import "../../../main-less/Colors";
+@import "../../../main-less/NavBar.less";
 
 #Resume {
 	z-index: 1;
+	width: 100vw;
 	min-height: 500px;
 	min-width: 500px;
     display: table-cell;   
     vertical-align: middle;
+    text-align: center;
+}
+#Resume canvas {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
 }
 #Resume-Data {
 	padding-left: 6%;
@@ -36,4 +44,14 @@
 }
 .span-1 {
 	width: 100%;
+}
+#resume-nav {
+	width: 90%;
+	margin-left: auto;
+ 	margin-right: auto;
+ 	min-width: 600px;
+}
+.resume-item {
+	.nav-element;
+	width: 16%;
 }

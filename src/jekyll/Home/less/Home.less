@@ -75,6 +75,11 @@
 		font-size: 3em;
 	}
 }
+@media all and (max-wdith: 500px) {
+	#name {
+		font-size: 2em;
+	}
+}
 /**
  * About Me
  */
@@ -88,9 +93,9 @@
 }
 #about-headshot {
 	float: left;
-	padding-right: 5%;
-	padding-left: 5%;
-	width: 40%;
+	padding-right: 15%;
+	padding-left: 15%;
+	width: 20%;
 	max-height: 100vh;
 	border-radius: 20px;
 }
@@ -98,6 +103,16 @@
 	color: @purple-primary;
 	border-bottom: 2px solid @purple-primary;
 	padding-bottom: 20px;
+}
+/**
+ * Contact Info
+ */
+#contact-info {
+	display: table-cell;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100vw;
+	min-width: 500px;
 }
 /**
  * Spaceship

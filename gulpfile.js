@@ -48,7 +48,10 @@ var pageFileMap = {
             PAGE_OUT: path.DEST
         },
     'Resume': { 
-                js: ['bower_components/three.js/build/three.min.js', 'src/jekyll/Resume/jsx/**.jsx'], 
+                js: ['bower_components/three.js/build/three.min.js', 
+                     'bower_components/three.js/examples/js/controls/OrbitControls.js',
+                     'bower_components/three.js/examples/js/libs/tween.min.js',
+                     'src/jekyll/Resume/jsx/**.jsx'], 
                 less: ['src/jekyll/Resume/less/**.less', 'src/jekyll/Resume/less/**.css'], 
                 PAGE_OUT: path.DEST + '/Resume'
             },
@@ -114,6 +117,7 @@ gulp.task('compile-dev', function() {
 
             gulp.src(main_js_dev.concat(pageProps.js))
                 .pipe(react())
+                .on('error', console.log.bind(console))
                 .pipe(order([
                   'bower_components/**/*.js',
                   '**/**.jsx'
@@ -123,6 +127,7 @@ gulp.task('compile-dev', function() {
 
             gulp.src(pageProps.less.concat(main_less))
                 .pipe(less())
+                .on('error', console.log.bind(console))
                 .pipe(concat(path.CSS_OUT))
                 .pipe(gulp.dest(pageProps.PAGE_OUT));
         }
