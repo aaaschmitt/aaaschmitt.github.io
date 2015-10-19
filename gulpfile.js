@@ -31,6 +31,7 @@ var path = {
   ASSETS: assets,
   JEKYLL_C: jekyll_config,
   JEKYLL_HTML: jekyll_html,
+  WEB: "CNAME",
 
   JS_OUT: 'build.min.js',
   CSS_OUT: 'build.min.css',
@@ -80,7 +81,7 @@ function getAllOtherFiles(pageFileMap) {
 }
 
 //Figure out all of the files to watch
-path.ALL = ['index.html'].concat(main_js_dev, main_less, jekyll_config, jekyll_html, assets, getAllOtherFiles(pageFileMap));
+path.ALL = ['index.html', "CNAME"].concat(main_js_dev, main_less, jekyll_config, jekyll_html, assets, getAllOtherFiles(pageFileMap));
 
 /*************
  * DEV BUILD *
@@ -96,6 +97,8 @@ gulp.task('clean', function(cb) {
 //copy html, jekyll, pure js, and assets to dist
 gulp.task('copy', function(){
   gulp.src(path.HOME)
+    .pipe(gulp.dest(path.DEST));
+  gulp.src(path.WEB)
     .pipe(gulp.dest(path.DEST));
   gulp.src(path.JEKYLL_C)
     .pipe(gulp.dest(path.DEST));
